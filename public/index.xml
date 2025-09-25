@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fantasky Blog</title>
-    <link>https://example.org/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on Fantasky Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>Zh_CN</language>
-    <lastBuildDate>Thu, 25 Sep 2025 21:43:14 +0800</lastBuildDate><atom:link href="https://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Sep 2025 21:43:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>My First Post</title>
-      <link>https://example.org/posts/my-first-post/</link>
+      <title>Hugo部署到Vercel</title>
+      <link>http://localhost:1313/posts/hugo-to-vercel/</link>
       <pubDate>Thu, 25 Sep 2025 21:43:14 +0800</pubDate>
       
-      <guid>https://example.org/posts/my-first-post/</guid>
+      <guid>http://localhost:1313/posts/hugo-to-vercel/</guid>
       <description>&lt;!-- end-chunk --&gt;
-&lt;!-- begin-chunk data-anchor=&#34;build-my-blog&#34; --&gt;
+&lt;!-- begin-chunk data-anchor=&#34;hugo安装&#34; --&gt;
 
-&lt;h2 class=&#34;header-anchor-wrapper&#34;&gt;Build My Blog
-  &lt;a href=&#34;#build-my-blog&#34; class=&#34;header-anchor-link&#34;&gt;
+&lt;h2 class=&#34;header-anchor-wrapper&#34;&gt;Hugo安装
+  &lt;a href=&#34;#hugo%e5%ae%89%e8%a3%85&#34; class=&#34;header-anchor-link&#34;&gt;
 &lt;svg
     xmlns=&#34;http://www.w3.org/2000/svg&#34;
     width=&#34;1rem&#34; height=&#34;1rem&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
@@ -27,7 +27,94 @@
 &lt;/svg&gt;
 
 &lt;/a&gt;
-&lt;/h2&gt;</description>
+&lt;/h2&gt;
+
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    winget install Hugo.Hugo.Extended
+&lt;/code&gt;&lt;/pre&gt;&lt;!-- end-chunk --&gt;
+&lt;!-- begin-chunk data-anchor=&#34;创建hugo站点&#34; --&gt;
+
+&lt;h3 class=&#34;header-anchor-wrapper&#34;&gt;创建Hugo站点
+  &lt;a href=&#34;#%e5%88%9b%e5%bb%bahugo%e7%ab%99%e7%82%b9&#34; class=&#34;header-anchor-link&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;1rem&#34; height=&#34;1rem&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/a&gt;
+&lt;/h3&gt;
+
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    hugo new site my-hugo-site
+&lt;/code&gt;&lt;/pre&gt;&lt;!-- end-chunk --&gt;
+&lt;!-- begin-chunk data-anchor=&#34;创建文章&#34; --&gt;
+
+&lt;h3 class=&#34;header-anchor-wrapper&#34;&gt;创建文章
+  &lt;a href=&#34;#%e5%88%9b%e5%bb%ba%e6%96%87%e7%ab%a0&#34; class=&#34;header-anchor-link&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;1rem&#34; height=&#34;1rem&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/a&gt;
+&lt;/h3&gt;
+
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    hugo new posts/my-first-post.md
+&lt;/code&gt;&lt;/pre&gt;&lt;!-- end-chunk --&gt;
+&lt;!-- begin-chunk data-anchor=&#34;打开文章将文章draft状态改为false&#34; --&gt;
+
+&lt;h3 class=&#34;header-anchor-wrapper&#34;&gt;打开文章，将文章draft状态改为false
+  &lt;a href=&#34;#%e6%89%93%e5%bc%80%e6%96%87%e7%ab%a0%e5%b0%86%e6%96%87%e7%ab%a0draft%e7%8a%b6%e6%80%81%e6%94%b9%e4%b8%bafalse&#34; class=&#34;header-anchor-link&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;1rem&#34; height=&#34;1rem&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/a&gt;
+&lt;/h3&gt;
+
+&lt;!-- end-chunk --&gt;
+&lt;!-- begin-chunk data-anchor=&#34;预览内容&#34; --&gt;
+
+&lt;h3 class=&#34;header-anchor-wrapper&#34;&gt;预览内容
+  &lt;a href=&#34;#%e9%a2%84%e8%a7%88%e5%86%85%e5%ae%b9&#34; class=&#34;header-anchor-link&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;1rem&#34; height=&#34;1rem&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/a&gt;
+&lt;/h3&gt;
+
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    hugo server
+&lt;/code&gt;&lt;/pre&gt;&lt;!-- end-chunk --&gt;
+&lt;!-- begin-chunk data-anchor=&#34;生成静态文件&#34; --&gt;
+
+&lt;h3 class=&#34;header-anchor-wrapper&#34;&gt;生成静态文件
+  &lt;a href=&#34;#%e7%94%9f%e6%88%90%e9%9d%99%e6%80%81%e6%96%87%e4%bb%b6&#34; class=&#34;header-anchor-link&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;1rem&#34; height=&#34;1rem&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/a&gt;
+&lt;/h3&gt;
+
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;    hugo
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后上传到GitHub仓库&lt;/p&gt;</description>
     </item>
     
   </channel>

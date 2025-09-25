@@ -1,4 +1,4 @@
 baseURL = 'https://blog.fantasky.dpdns.org/'
-languageCode = 'Zh_CN'
+languageCode = 'zh_cn'
 title = 'Fantasky Blog'
 theme = 'hugo-theme-monochrome'
