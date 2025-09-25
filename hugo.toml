@@ -1,7 +1,17 @@
 baseURL = 'https://blog.fantasky.dpdns.org/'
 languageCode = 'zh_cn'
 title = 'Fantasky`s Blog'
-theme = 'paper'
+theme = 'hugo-theme-monochrome'
+
 [params]
-    color = 'gray'
-    github = 'huantian1234'
+    toc_position = "right"
+    enable_site_search = true
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+[[menu.navbar]]
+identifier = "main"
+name = "归档"
+title = "归档"
+url = "/posts/"
+weight = 100
+
