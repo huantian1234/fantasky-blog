@@ -1,0 +1,4 @@
+baseURL = 'https://example.org/'
+languageCode = 'Zh_CN'
+title = 'Fantasky Blog'
+theme = 'hugo-theme-monochrome'
