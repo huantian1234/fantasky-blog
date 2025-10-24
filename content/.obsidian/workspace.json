@@ -20,6 +20,41 @@
               "icon": "lucide-file",
               "title": "hugo-to-vercel"
             }
+          },
+          {
+            "id": "be962bdcd2222512",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "posts/install-nixos.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "install-nixos"
+            }
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "9e4bd383b4bcbde2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d61445a811049034",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "posts/install-nixos.md",
+                "mode": "preview",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "install-nixos"
+            }
           }
         ]
       }
@@ -169,6 +204,6 @@
       "bases:创建新数据库": false
     }
   },
-  "active": "545b38534df618d4",
+  "active": "d61445a811049034",
   "lastOpenFiles": []
 }

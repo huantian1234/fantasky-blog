@@ -4,16 +4,68 @@
     <title>静态网站 on Fantasky`s Blog</title>
     <link>http://localhost:1313/tags/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/</link>
     <description>Recent content in 静态网站 on Fantasky`s Blog</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>zh_cn</language>
-    <lastBuildDate>Thu, 25 Sep 2025 21:43:14 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Sep 2025 21:43:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hugo部署到Vercel完整指南</title>
       <link>http://localhost:1313/posts/hugo-to-vercel/</link>
       <pubDate>Thu, 25 Sep 2025 21:43:14 +0800</pubDate>
+      
       <guid>http://localhost:1313/posts/hugo-to-vercel/</guid>
-      <description>&lt;p&gt;本文将详细介绍如何使用Hugo创建静态网站并部署到Vercel平台，包括完整的安装、配置和部署流程。&lt;/p&gt;&#xA;&lt;h2 id=&#34;-hugo安装与环境配置&#34;&gt;📦 Hugo安装与环境配置&lt;/h2&gt;&#xA;&lt;h3 id=&#34;windows环境安装&#34;&gt;Windows环境安装&lt;/h3&gt;&#xA;&lt;p&gt;使用Windows包管理器安装Hugo Extended版本：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;winget install Hugo.Hugo.Extended&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;验证安装&#34;&gt;验证安装&lt;/h3&gt;&#xA;&lt;p&gt;安装完成后，验证Hugo版本：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hugo version&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-创建和配置hugo站点&#34;&gt;🚀 创建和配置Hugo站点&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-创建新站点&#34;&gt;1. 创建新站点&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hugo new site my-hugo-site&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd my-hugo-site&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-创建第一篇文章&#34;&gt;2. 创建第一篇文章&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hugo new posts/my-first-post.md&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3-编辑文章内容&#34;&gt;3. 编辑文章内容&lt;/h3&gt;&#xA;&lt;p&gt;打开生成的文章文件，修改头部信息：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;+++&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;title = &amp;#39;我的第一篇文章&amp;#39;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;date = 2025-01-20T10:00:00+08:00&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;draft = false &lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;tags = [&amp;#39;Hugo&amp;#39;, &amp;#39;开始&amp;#39;]&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;+++&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;这是我的第一篇Hugo文章内容...&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-本地预览和测试&#34;&gt;🔍 本地预览和测试&lt;/h2&gt;&#xA;&lt;h3 id=&#34;启动开发服务器&#34;&gt;启动开发服务器&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hugo server -D &lt;span style=&#34;color:#75715e&#34;&gt;#-D代表显示草稿文章也就是draft = true的文章&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;访问 &lt;code&gt;http://localhost:1313&lt;/code&gt; 预览网站效果。&lt;/p&gt;&#xA;&lt;h3 id=&#34;生成静态文件&#34;&gt;生成静态文件&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hugo&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;生成的静态文件位于 &lt;code&gt;public/&lt;/code&gt; 目录下。&lt;/p&gt;&#xA;&lt;h2 id=&#34;-git仓库配置&#34;&gt;📋 Git仓库配置&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-初始化仓库并提交代码&#34;&gt;1. 初始化仓库并提交代码&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git add .&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git commit -m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Initial Hugo site&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-推送到github&#34;&gt;2. 推送到GitHub&lt;/h3&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git remote add origin https://github.com/yourusername/your-repo.git&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git branch -M main&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git push -u origin main&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-vercel部署配置&#34;&gt;🌐 Vercel部署配置&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-创建vercel账号&#34;&gt;1. 创建Vercel账号&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;访问 &lt;a href=&#34;https://vercel.com/&#34;&gt;Vercel官网&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;使用GitHub账号登录（推荐）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;2-导入github项目&#34;&gt;2. 导入GitHub项目&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;点击 &lt;strong&gt;&amp;ldquo;New Project&amp;rdquo;&lt;/strong&gt; 按钮&lt;/li&gt;&#xA;&lt;li&gt;选择 &lt;strong&gt;&amp;ldquo;Import Git Repository&amp;rdquo;&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;li&gt;选择你的Hugo项目仓库&lt;/li&gt;&#xA;&lt;li&gt;点击 &lt;strong&gt;&amp;ldquo;Import&amp;rdquo;&lt;/strong&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;3-环境变量设置&#34;&gt;3. 环境变量设置&lt;/h3&gt;&#xA;&lt;p&gt;在 &lt;strong&gt;Settings &amp;gt; Environment Variables&lt;/strong&gt; 中添加：&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文将详细介绍如何使用Hugo创建静态网站并部署到Vercel平台，包括完整的安装、配置和部署流程。&lt;/p&gt;
+&lt;!-- end-chunk --&gt;
+&lt;!-- begin-chunk data-anchor=&#34;-hugo安装与环境配置&#34; --&gt;
+
+&lt;h2 class=&#34;header-anchor-wrapper&#34;&gt;📦 Hugo安装与环境配置
+  &lt;a href=&#34;#-hugo%e5%ae%89%e8%a3%85%e4%b8%8e%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae&#34; class=&#34;header-anchor-link&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;1rem&#34; height=&#34;1rem&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/a&gt;
+&lt;/h2&gt;
+
+&lt;!-- end-chunk --&gt;
+&lt;!-- begin-chunk data-anchor=&#34;windows环境安装&#34; --&gt;
+
+&lt;h3 class=&#34;header-anchor-wrapper&#34;&gt;Windows环境安装
+  &lt;a href=&#34;#windows%e7%8e%af%e5%a2%83%e5%ae%89%e8%a3%85&#34; class=&#34;header-anchor-link&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;1rem&#34; height=&#34;1rem&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/a&gt;
+&lt;/h3&gt;
+
+&lt;p&gt;使用Windows包管理器安装Hugo Extended版本：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;winget install Hugo.Hugo.Extended
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;!-- end-chunk --&gt;
+&lt;!-- begin-chunk data-anchor=&#34;验证安装&#34; --&gt;
+
+&lt;h3 class=&#34;header-anchor-wrapper&#34;&gt;验证安装
+  &lt;a href=&#34;#%e9%aa%8c%e8%af%81%e5%ae%89%e8%a3%85&#34; class=&#34;header-anchor-link&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;1rem&#34; height=&#34;1rem&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/a&gt;
+&lt;/h3&gt;
+
+&lt;p&gt;安装完成后，验证Hugo版本：&lt;/p&gt;</description>
     </item>
+    
   </channel>
 </rss>

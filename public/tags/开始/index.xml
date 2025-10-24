@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Fantasky`s Blog</title>
-    <link>http://localhost:1313/</link>
-    <description>Recent content on Fantasky`s Blog</description>
+    <title>开始 on Fantasky`s Blog</title>
+    <link>http://localhost:1313/tags/%E5%BC%80%E5%A7%8B/</link>
+    <description>Recent content in 开始 on Fantasky`s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh_cn</language>
-    <lastBuildDate>Thu, 25 Sep 2025 21:43:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Jan 2025 10:00:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%BC%80%E5%A7%8B/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Hugo部署到Vercel完整指南</title>
+      <title>我的第一篇文章</title>
       <link>http://localhost:1313/posts/hugo-to-vercel/</link>
-      <pubDate>Thu, 25 Sep 2025 21:43:14 +0800</pubDate>
+      <pubDate>Mon, 20 Jan 2025 10:00:00 +0800</pubDate>
       
       <guid>http://localhost:1313/posts/hugo-to-vercel/</guid>
       <description>&lt;p&gt;本文将详细介绍如何使用Hugo创建静态网站并部署到Vercel平台，包括完整的安装、配置和部署流程。&lt;/p&gt;
