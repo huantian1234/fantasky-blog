@@ -22,7 +22,7 @@
     <meta charset="utf-8">
     <link rel="shortcut icon" href='https://blog.fantasky.dpdns.org/favicon.ico' type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>mini-redis学习分析01 - Fantasky`s Blog</title>
+    <title>Mini-Redis 学习分析（一） - Fantasky`s Blog</title>
 
     
 
@@ -33,9 +33,9 @@
     
         <meta property="og:url" content="https://blog.fantasky.dpdns.org/posts/mini-redis-learn-1/">
   <meta property="og:site_name" content="Fantasky`s Blog">
-  <meta property="og:title" content="mini-redis学习分析01">
-  <meta property="og:description" content="0x01服务端启动过程Server初始化启动Listener
-Listener变量 描述 db_holder — listener 管理 TCP 连接 limit_connections 限制连接数，类型：Arc&lt;Semaphore&gt; notify_shutdown 关闭通知 shutdown_complete_tx 关闭完成通知 run方法循环监听连接,启动Handler">
+  <meta property="og:title" content="Mini-Redis 学习分析（一）">
+  <meta property="og:description" content="0x01 服务端启动过程Server服务端启动时，首先初始化 Listener 实例，准备接收客户端连接。
+ListenerListener 负责管理服务端的核心组件：">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -47,9 +47,9 @@ Listener变量 描述 db_holder — listener 管理 TCP 连接 limit_connection
     
         
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="mini-redis学习分析01">
-  <meta name="twitter:description" content="0x01服务端启动过程Server初始化启动Listener
-Listener变量 描述 db_holder — listener 管理 TCP 连接 limit_connections 限制连接数，类型：Arc&lt;Semaphore&gt; notify_shutdown 关闭通知 shutdown_complete_tx 关闭完成通知 run方法循环监听连接,启动Handler">
+  <meta name="twitter:title" content="Mini-Redis 学习分析（一）">
+  <meta name="twitter:description" content="0x01 服务端启动过程Server服务端启动时，首先初始化 Listener 实例，准备接收客户端连接。
+ListenerListener 负责管理服务端的核心组件：">
 
     <link rel="stylesheet" href="/style.min.ce5f3efd2a92c214ac7eda7a2ac6406bb3f876bf941ee33af45d44bcadd55da1.css" integrity="sha256-zl8&#43;/SqSwhSsftp6KsZAa7P4dr&#43;UHuM69F1EvK3VXaE=">
 
@@ -219,10 +219,20 @@ Listener变量 描述 db_holder — listener 管理 TCP 连接 limit_connection
     <li><a href="#server">Server</a></li>
     <li><a href="#listener">Listener</a>
       <ul>
-        <li><a href="#run方法">run方法</a></li>
+        <li><a href="#run-方法">run 方法</a></li>
       </ul>
     </li>
     <li><a href="#handler">Handler</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-读取帧数据">1. 读取帧数据</a></li>
+        <li><a href="#2-解析命令">2. 解析命令</a></li>
+        <li><a href="#3-执行命令">3. 执行命令</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -251,11 +261,11 @@ Listener变量 描述 db_holder — listener 管理 TCP 连接 limit_connection
             
             
         
-        <section id="0x01服务端启动过程">
+        <section id="0x01-服务端启动过程">
 
 
-<h1 class="header-anchor-wrapper">0x01服务端启动过程
-  <a href="#0x01%e6%9c%8d%e5%8a%a1%e7%ab%af%e5%90%af%e5%8a%a8%e8%bf%87%e7%a8%8b" class="header-anchor-link">
+<h1 class="header-anchor-wrapper">0x01 服务端启动过程
+  <a href="#0x01-%e6%9c%8d%e5%8a%a1%e7%ab%af%e5%90%af%e5%8a%a8%e8%bf%87%e7%a8%8b" class="header-anchor-link">
 <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1rem" height="1rem" viewBox="0 0 24 24" fill="none"
@@ -291,7 +301,7 @@ Listener变量 描述 db_holder — listener 管理 TCP 连接 limit_connection
 </a>
 </h2>
 
-<p>初始化启动Listener</p>
+<p>服务端启动时，首先初始化 <code>Listener</code> 实例，准备接收客户端连接。</p>
 </section>
     
         
@@ -316,6 +326,7 @@ Listener变量 描述 db_holder — listener 管理 TCP 连接 limit_connection
 </a>
 </h2>
 
+<p><code>Listener</code> 负责管理服务端的核心组件：</p>
 <table class="mc-table">
   <thead>
       <tr>
@@ -326,23 +337,23 @@ Listener变量 描述 db_holder — listener 管理 TCP 连接 limit_connection
   <tbody>
       <tr>
           <td><code>db_holder</code></td>
-          <td>—</td>
+          <td>持有数据库实例</td>
       </tr>
       <tr>
           <td><code>listener</code></td>
-          <td>管理 TCP 连接</td>
+          <td>TCP 监听器，负责接收客户端连接</td>
       </tr>
       <tr>
           <td><code>limit_connections</code></td>
-          <td>限制连接数，类型：<code>Arc&lt;Semaphore&gt;</code></td>
+          <td>连接数限制器，类型为 <code>Arc&lt;Semaphore&gt;</code></td>
       </tr>
       <tr>
           <td><code>notify_shutdown</code></td>
-          <td>关闭通知</td>
+          <td>用于广播关闭信号的通知器</td>
       </tr>
       <tr>
           <td><code>shutdown_complete_tx</code></td>
-          <td>关闭完成通知</td>
+          <td>用于确认关闭完成的发送端</td>
       </tr>
   </tbody>
 </table>
@@ -354,11 +365,11 @@ Listener变量 描述 db_holder — listener 管理 TCP 连接 limit_connection
             
             
         
-        <section id="run方法">
+        <section id="run-方法">
 
 
-<h3 class="header-anchor-wrapper">run方法
-  <a href="#run%e6%96%b9%e6%b3%95" class="header-anchor-link">
+<h3 class="header-anchor-wrapper">run 方法
+  <a href="#run-%e6%96%b9%e6%b3%95" class="header-anchor-link">
 <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1rem" height="1rem" viewBox="0 0 24 24" fill="none"
@@ -370,7 +381,7 @@ Listener变量 描述 db_holder — listener 管理 TCP 连接 limit_connection
 </a>
 </h3>
 
-<p>循环监听连接,启动Handler</p>
+<p><code>run</code> 方法进入主循环，持续监听新连接。每当有客户端接入时，会创建一个 <code>Handler</code> 实例来处理该连接。</p>
 </section>
     
         
@@ -395,7 +406,8 @@ Listener变量 描述 db_holder — listener 管理 TCP 连接 limit_connection
 </a>
 </h2>
 
-<p>开始处理连接</p>
+<p><code>Handler</code> 负责处理单个客户端连接的全生命周期，包括读取请求、解析命令和执行操作。</p>
+<hr>
 </section>
     
         
@@ -404,11 +416,11 @@ Listener变量 描述 db_holder — listener 管理 TCP 连接 limit_connection
             
             
         
-        <section id="0x02命令处理流程">
+        <section id="0x02-命令处理流程">
 
 
-<h1 class="header-anchor-wrapper">0x02命令处理流程
-  <a href="#0x02%e5%91%bd%e4%bb%a4%e5%a4%84%e7%90%86%e6%b5%81%e7%a8%8b" class="header-anchor-link">
+<h1 class="header-anchor-wrapper">0x02 命令处理流程
+  <a href="#0x02-%e5%91%bd%e4%bb%a4%e5%a4%84%e7%90%86%e6%b5%81%e7%a8%8b" class="header-anchor-link">
 <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1rem" height="1rem" viewBox="0 0 24 24" fill="none"
@@ -420,19 +432,125 @@ Listener变量 描述 db_holder — listener 管理 TCP 连接 limit_connection
 </a>
 </h1>
 
-<p>connecton-&gt;read_frame 将socket数据读取到Frame</p>
+<p>命令处理分为以下三个阶段：</p>
+</section>
+    
+        
+        
+            
+            
+            
+        
+        <section id="1-读取帧数据">
+
+
+<h3 class="header-anchor-wrapper">1. 读取帧数据
+  <a href="#1-%e8%af%bb%e5%8f%96%e5%b8%a7%e6%95%b0%e6%8d%ae" class="header-anchor-link">
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1rem" height="1rem" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+    stroke-linejoin="round">
+    <line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line>
+</svg>
+
+</a>
+</h3>
+
+<p>通过 <code>Connection::read_frame</code> 方法从 socket 读取原始数据，并解析为 <code>Frame</code> 结构。</p>
 <blockquote>
-<p>mini-Redis 协议帧类型</p>
-<ul>
-<li><code>简单字符: +内容\r\n</code></li>
-<li><code>错误: -内容\r\n</code></li>
-<li><code>整数: :数字\r\n</code></li>
-<li><code>批量字符串: $长度\r\n内容\r\n</code></li>
-<li><code>空值: $-1\r\n</code></li>
-<li><code>数组: *数量\r\n元素1元素2...</code></li>
-</ul></blockquote>
-<p>解析到完整的Frame之后用 Command::from_frame转换成Command数据结构</p>
-<p>最后调用apply应用结果到db当中</p>
+<p><strong>Mini-Redis 协议帧类型</strong></p>
+<table class="mc-table">
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>格式</th>
+          <th>示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>简单字符串</td>
+          <td><code>+内容\r\n</code></td>
+          <td><code>+OK\r\n</code></td>
+      </tr>
+      <tr>
+          <td>错误</td>
+          <td><code>-内容\r\n</code></td>
+          <td><code>-ERR unknown\r\n</code></td>
+      </tr>
+      <tr>
+          <td>整数</td>
+          <td><code>:数字\r\n</code></td>
+          <td><code>:1000\r\n</code></td>
+      </tr>
+      <tr>
+          <td>批量字符串</td>
+          <td><code>$长度\r\n内容\r\n</code></td>
+          <td><code>$5\r\nhello\r\n</code></td>
+      </tr>
+      <tr>
+          <td>空值</td>
+          <td><code>$-1\r\n</code></td>
+          <td><code>$-1\r\n</code></td>
+      </tr>
+      <tr>
+          <td>数组</td>
+          <td><code>*数量\r\n元素...</code></td>
+          <td><code>*2\r\n$3\r\nfoo\r\n$3\r\nbar\r\n</code></td>
+      </tr>
+  </tbody>
+</table></blockquote>
+</section>
+    
+        
+        
+            
+            
+            
+        
+        <section id="2-解析命令">
+
+
+<h3 class="header-anchor-wrapper">2. 解析命令
+  <a href="#2-%e8%a7%a3%e6%9e%90%e5%91%bd%e4%bb%a4" class="header-anchor-link">
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1rem" height="1rem" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+    stroke-linejoin="round">
+    <line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line>
+</svg>
+
+</a>
+</h3>
+
+<p>当完整的 <code>Frame</code> 解析完成后，调用 <code>Command::from_frame</code> 将其转换为具体的 <code>Command</code> 枚举类型。</p>
+</section>
+    
+        
+        
+            
+            
+            
+        
+        <section id="3-执行命令">
+
+
+<h3 class="header-anchor-wrapper">3. 执行命令
+  <a href="#3-%e6%89%a7%e8%a1%8c%e5%91%bd%e4%bb%a4" class="header-anchor-link">
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1rem" height="1rem" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+    stroke-linejoin="round">
+    <line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line>
+</svg>
+
+</a>
+</h3>
+
+<p>最后调用 <code>Command::apply</code> 方法，将命令执行结果应用到数据库中，并将响应返回给客户端。</p>
 </section>
     
 </article>
