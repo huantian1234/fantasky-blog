@@ -34,8 +34,7 @@
         <meta property="og:url" content="https://blog.fantasky.dpdns.org/posts/mini-redis-learn-1/">
   <meta property="og:site_name" content="Fantasky`s Blog">
   <meta property="og:title" content="Mini-Redis 学习分析（一）">
-  <meta property="og:description" content="0x01 服务端启动过程Server服务端启动时，首先初始化 Listener 实例，准备接收客户端连接。
-ListenerListener 负责管理服务端的核心组件：">
+  <meta property="og:description" content="Mini-Redis 学习分析（一）0x01 服务端启动过程Server服务端启动时，首先初始化 Listener 实例，准备接收客户端连接。">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -48,8 +47,7 @@ ListenerListener 负责管理服务端的核心组件：">
         
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Mini-Redis 学习分析（一）">
-  <meta name="twitter:description" content="0x01 服务端启动过程Server服务端启动时，首先初始化 Listener 实例，准备接收客户端连接。
-ListenerListener 负责管理服务端的核心组件：">
+  <meta name="twitter:description" content="Mini-Redis 学习分析（一）0x01 服务端启动过程Server服务端启动时，首先初始化 Listener 实例，准备接收客户端连接。">
 
     <link rel="stylesheet" href="/style.min.ce5f3efd2a92c214ac7eda7a2ac6406bb3f876bf941ee33af45d44bcadd55da1.css" integrity="sha256-zl8&#43;/SqSwhSsftp6KsZAa7P4dr&#43;UHuM69F1EvK3VXaE=">
 
@@ -216,21 +214,16 @@ ListenerListener 负责管理服务端的核心组件：">
     <div class="collapsible-menu">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#server">Server</a></li>
-    <li><a href="#listener">Listener</a>
+    <li><a href="#0x01-服务端启动过程">0x01 服务端启动过程</a>
       <ul>
-        <li><a href="#run-方法">run 方法</a></li>
+        <li><a href="#server">Server</a></li>
+        <li><a href="#listener">Listener</a></li>
+        <li><a href="#handler">Handler</a></li>
       </ul>
     </li>
-    <li><a href="#handler">Handler</a></li>
-  </ul>
-
-  <ul>
-    <li>
+    <li><a href="#0x02-命令处理流程">0x02 命令处理流程</a>
       <ul>
-        <li><a href="#1-读取帧数据">1. 读取帧数据</a></li>
-        <li><a href="#2-解析命令">2. 解析命令</a></li>
-        <li><a href="#3-执行命令">3. 执行命令</a></li>
+        <li></li>
       </ul>
     </li>
   </ul>
@@ -261,11 +254,11 @@ ListenerListener 负责管理服务端的核心组件：">
             
             
         
-        <section id="0x01-服务端启动过程">
+        <section id="mini-redis-学习分析一">
 
 
-<h1 class="header-anchor-wrapper">0x01 服务端启动过程
-  <a href="#0x01-%e6%9c%8d%e5%8a%a1%e7%ab%af%e5%90%af%e5%8a%a8%e8%bf%87%e7%a8%8b" class="header-anchor-link">
+<h1 class="header-anchor-wrapper">Mini-Redis 学习分析（一）
+  <a href="#mini-redis-%e5%ad%a6%e4%b9%a0%e5%88%86%e6%9e%90%e4%b8%80" class="header-anchor-link">
 <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1rem" height="1rem" viewBox="0 0 24 24" fill="none"
@@ -285,11 +278,11 @@ ListenerListener 负责管理服务端的核心组件：">
             
             
         
-        <section id="server">
+        <section id="0x01-服务端启动过程">
 
 
-<h2 class="header-anchor-wrapper">Server
-  <a href="#server" class="header-anchor-link">
+<h2 class="header-anchor-wrapper">0x01 服务端启动过程
+  <a href="#0x01-%e6%9c%8d%e5%8a%a1%e7%ab%af%e5%90%af%e5%8a%a8%e8%bf%87%e7%a8%8b" class="header-anchor-link">
 <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1rem" height="1rem" viewBox="0 0 24 24" fill="none"
@@ -300,6 +293,30 @@ ListenerListener 负责管理服务端的核心组件：">
 
 </a>
 </h2>
+
+</section>
+    
+        
+        
+            
+            
+            
+        
+        <section id="server">
+
+
+<h3 class="header-anchor-wrapper">Server
+  <a href="#server" class="header-anchor-link">
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1rem" height="1rem" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+    stroke-linejoin="round">
+    <line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line>
+</svg>
+
+</a>
+</h3>
 
 <p>服务端启动时，首先初始化 <code>Listener</code> 实例，准备接收客户端连接。</p>
 </section>
@@ -313,7 +330,7 @@ ListenerListener 负责管理服务端的核心组件：">
         <section id="listener">
 
 
-<h2 class="header-anchor-wrapper">Listener
+<h3 class="header-anchor-wrapper">Listener
   <a href="#listener" class="header-anchor-link">
 <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -324,7 +341,7 @@ ListenerListener 负责管理服务端的核心组件：">
 </svg>
 
 </a>
-</h2>
+</h3>
 
 <p><code>Listener</code> 负责管理服务端的核心组件：</p>
 <table class="mc-table">
@@ -368,7 +385,7 @@ ListenerListener 负责管理服务端的核心组件：">
         <section id="run-方法">
 
 
-<h3 class="header-anchor-wrapper">run 方法
+<h4 class="header-anchor-wrapper">run 方法
   <a href="#run-%e6%96%b9%e6%b3%95" class="header-anchor-link">
 <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -379,7 +396,7 @@ ListenerListener 负责管理服务端的核心组件：">
 </svg>
 
 </a>
-</h3>
+</h4>
 
 <p><code>run</code> 方法进入主循环，持续监听新连接。每当有客户端接入时，会创建一个 <code>Handler</code> 实例来处理该连接。</p>
 </section>
@@ -393,7 +410,7 @@ ListenerListener 负责管理服务端的核心组件：">
         <section id="handler">
 
 
-<h2 class="header-anchor-wrapper">Handler
+<h3 class="header-anchor-wrapper">Handler
   <a href="#handler" class="header-anchor-link">
 <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -404,7 +421,7 @@ ListenerListener 负责管理服务端的核心组件：">
 </svg>
 
 </a>
-</h2>
+</h3>
 
 <p><code>Handler</code> 负责处理单个客户端连接的全生命周期，包括读取请求、解析命令和执行操作。</p>
 <hr>
@@ -419,7 +436,7 @@ ListenerListener 负责管理服务端的核心组件：">
         <section id="0x02-命令处理流程">
 
 
-<h1 class="header-anchor-wrapper">0x02 命令处理流程
+<h2 class="header-anchor-wrapper">0x02 命令处理流程
   <a href="#0x02-%e5%91%bd%e4%bb%a4%e5%a4%84%e7%90%86%e6%b5%81%e7%a8%8b" class="header-anchor-link">
 <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -430,7 +447,7 @@ ListenerListener 负责管理服务端的核心组件：">
 </svg>
 
 </a>
-</h1>
+</h2>
 
 <p>命令处理分为以下三个阶段：</p>
 </section>
@@ -444,7 +461,7 @@ ListenerListener 负责管理服务端的核心组件：">
         <section id="1-读取帧数据">
 
 
-<h3 class="header-anchor-wrapper">1. 读取帧数据
+<h4 class="header-anchor-wrapper">1. 读取帧数据
   <a href="#1-%e8%af%bb%e5%8f%96%e5%b8%a7%e6%95%b0%e6%8d%ae" class="header-anchor-link">
 <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -455,7 +472,7 @@ ListenerListener 负责管理服务端的核心组件：">
 </svg>
 
 </a>
-</h3>
+</h4>
 
 <p>通过 <code>Connection::read_frame</code> 方法从 socket 读取原始数据，并解析为 <code>Frame</code> 结构。</p>
 <blockquote>
@@ -512,7 +529,7 @@ ListenerListener 负责管理服务端的核心组件：">
         <section id="2-解析命令">
 
 
-<h3 class="header-anchor-wrapper">2. 解析命令
+<h4 class="header-anchor-wrapper">2. 解析命令
   <a href="#2-%e8%a7%a3%e6%9e%90%e5%91%bd%e4%bb%a4" class="header-anchor-link">
 <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -523,7 +540,7 @@ ListenerListener 负责管理服务端的核心组件：">
 </svg>
 
 </a>
-</h3>
+</h4>
 
 <p>当完整的 <code>Frame</code> 解析完成后，调用 <code>Command::from_frame</code> 将其转换为具体的 <code>Command</code> 枚举类型。</p>
 </section>
@@ -537,7 +554,7 @@ ListenerListener 负责管理服务端的核心组件：">
         <section id="3-执行命令">
 
 
-<h3 class="header-anchor-wrapper">3. 执行命令
+<h4 class="header-anchor-wrapper">3. 执行命令
   <a href="#3-%e6%89%a7%e8%a1%8c%e5%91%bd%e4%bb%a4" class="header-anchor-link">
 <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -548,7 +565,7 @@ ListenerListener 负责管理服务端的核心组件：">
 </svg>
 
 </a>
-</h3>
+</h4>
 
 <p>最后调用 <code>Command::apply</code> 方法，将命令执行结果应用到数据库中，并将响应返回给客户端。</p>
 </section>

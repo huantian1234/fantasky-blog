@@ -14,10 +14,10 @@
       
       <guid>https://blog.fantasky.dpdns.org/posts/mini-redis-learn-1/</guid>
       <description>&lt;!-- end-chunk --&gt;
-&lt;!-- begin-chunk data-anchor=&#34;0x01-服务端启动过程&#34; --&gt;
+&lt;!-- begin-chunk data-anchor=&#34;mini-redis-学习分析一&#34; --&gt;
 
-&lt;h1 class=&#34;header-anchor-wrapper&#34;&gt;0x01 服务端启动过程
-  &lt;a href=&#34;#0x01-%e6%9c%8d%e5%8a%a1%e7%ab%af%e5%90%af%e5%8a%a8%e8%bf%87%e7%a8%8b&#34; class=&#34;header-anchor-link&#34;&gt;
+&lt;h1 class=&#34;header-anchor-wrapper&#34;&gt;Mini-Redis 学习分析（一）
+  &lt;a href=&#34;#mini-redis-%e5%ad%a6%e4%b9%a0%e5%88%86%e6%9e%90%e4%b8%80&#34; class=&#34;header-anchor-link&#34;&gt;
 &lt;svg
     xmlns=&#34;http://www.w3.org/2000/svg&#34;
     width=&#34;1rem&#34; height=&#34;1rem&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
@@ -30,9 +30,25 @@
 &lt;/h1&gt;
 
 &lt;!-- end-chunk --&gt;
+&lt;!-- begin-chunk data-anchor=&#34;0x01-服务端启动过程&#34; --&gt;
+
+&lt;h2 class=&#34;header-anchor-wrapper&#34;&gt;0x01 服务端启动过程
+  &lt;a href=&#34;#0x01-%e6%9c%8d%e5%8a%a1%e7%ab%af%e5%90%af%e5%8a%a8%e8%bf%87%e7%a8%8b&#34; class=&#34;header-anchor-link&#34;&gt;
+&lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;1rem&#34; height=&#34;1rem&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;&gt;
+    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
+&lt;/svg&gt;
+
+&lt;/a&gt;
+&lt;/h2&gt;
+
+&lt;!-- end-chunk --&gt;
 &lt;!-- begin-chunk data-anchor=&#34;server&#34; --&gt;
 
-&lt;h2 class=&#34;header-anchor-wrapper&#34;&gt;Server
+&lt;h3 class=&#34;header-anchor-wrapper&#34;&gt;Server
   &lt;a href=&#34;#server&#34; class=&#34;header-anchor-link&#34;&gt;
 &lt;svg
     xmlns=&#34;http://www.w3.org/2000/svg&#34;
@@ -43,26 +59,9 @@
 &lt;/svg&gt;
 
 &lt;/a&gt;
-&lt;/h2&gt;
+&lt;/h3&gt;
 
-&lt;p&gt;服务端启动时，首先初始化 &lt;code&gt;Listener&lt;/code&gt; 实例，准备接收客户端连接。&lt;/p&gt;
-&lt;!-- end-chunk --&gt;
-&lt;!-- begin-chunk data-anchor=&#34;listener&#34; --&gt;
-
-&lt;h2 class=&#34;header-anchor-wrapper&#34;&gt;Listener
-  &lt;a href=&#34;#listener&#34; class=&#34;header-anchor-link&#34;&gt;
-&lt;svg
-    xmlns=&#34;http://www.w3.org/2000/svg&#34;
-    width=&#34;1rem&#34; height=&#34;1rem&#34; viewBox=&#34;0 0 24 24&#34; fill=&#34;none&#34;
-    stroke=&#34;currentColor&#34; stroke-width=&#34;2&#34; stroke-linecap=&#34;round&#34;
-    stroke-linejoin=&#34;round&#34;&gt;
-    &lt;line x1=&#34;4&#34; y1=&#34;9&#34; x2=&#34;20&#34; y2=&#34;9&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;4&#34; y1=&#34;15&#34; x2=&#34;20&#34; y2=&#34;15&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;10&#34; y1=&#34;3&#34; x2=&#34;8&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;&lt;line x1=&#34;16&#34; y1=&#34;3&#34; x2=&#34;14&#34; y2=&#34;21&#34;&gt;&lt;/line&gt;
-&lt;/svg&gt;
-
-&lt;/a&gt;
-&lt;/h2&gt;
-
-&lt;p&gt;&lt;code&gt;Listener&lt;/code&gt; 负责管理服务端的核心组件：&lt;/p&gt;</description>
+&lt;p&gt;服务端启动时，首先初始化 &lt;code&gt;Listener&lt;/code&gt; 实例，准备接收客户端连接。&lt;/p&gt;</description>
     </item>
     
     <item>
